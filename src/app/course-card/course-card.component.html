@@ -1,0 +1,63 @@
+<div class="course-card">
+
+    <div class="course-title">
+        {{course.description}}
+    </div>
+
+    <!-- <img width="300" alt="Angular Logo" [src]="course.iconUrl"> -->
+    <!-- content projection involves sslecting class, element, tag, etc -->
+
+    <!-- <ng-template #blankImage>
+        <p class="warn">
+            <b>{{course.description}}</b> has no image available
+        </p>
+    </ng-template> -->
+
+    <ng-content select="course-image" *ngIf="course.iconUrl; else noImage"></ng-content>
+
+    <!-- displays whatever has not been selected for content projection -->
+    <!-- content projection allows for configurable components -->
+    <!-- <ng-content></ng-content> -->
+    
+    <!-- <ng-template #noImage>
+        <p>No image availavle</p>
+    </ng-template> -->
+
+    <ng-template #noImage>
+        <ng-container *ngTemplateOutlet="noImageTemplate; context: {description: course.description}"></ng-container>
+    </ng-template>
+
+    <div class="course-description">
+        {{course.longDescription}}
+    </div>
+
+    <div class="course-category" [ngSwitch]="course.category">
+        <!-- @switch (course.category) {
+            @case ("BEGINNER") {
+                <div class="category">Beginner</div>
+            }
+            @case ("INTERMEDIATE") {
+                <div class="category">Intermediate</div>
+            }
+            @case ("ADVANCED") {
+                <div class="category">Advanced</div>
+            }
+            @default {
+                <div class="category">Unknown</div>
+            }
+        } -->
+
+        <!-- just to show you can wrap directives with ng-container rather than creating a div -->
+        <ng-container *ngSwitchCase="'BEGINNER'"> 
+            <div class="category">Beginner</div>
+        </ng-container>
+        <div class="category" *ngSwitchCase="'INTERMEDIATE'">Intermediate</div>
+        <div class="category" *ngSwitchCase="'ADVANCED'">Advanced</div>
+        <div class="category" *ngSwitchDefault>All Levels</div>
+
+
+    </div>
+
+    <button (click)="onCourseViewed()">View Course</button>
+
+</div>
