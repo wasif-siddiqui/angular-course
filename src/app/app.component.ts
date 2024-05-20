@@ -16,6 +16,10 @@ export class AppComponent implements AfterViewInit {
     @ViewChildren(CourseCardComponent, {read: ElementRef})
     cards : QueryList<ElementRef>;
 
+    onToggle(isHighlighted: boolean) {
+      console.log(isHighlighted);
+    }
+
 
     constructor() {
 

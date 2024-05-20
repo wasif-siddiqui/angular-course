@@ -26,7 +26,7 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
     course: Course;
 
     @Input()
-    cardIndex: number;
+    cardIndex: number; 
 
     @Output('courseSelected')
     courseEmitter = new EventEmitter<Course>();
